@@ -47,11 +47,4 @@ Rails.application.configure do
     Bullet.alert = true
     Bullet.rails_logger = true
   end
-
-  Rails.application.config.middleware.use ExceptionNotification::Rack,
-                                          email: {
-                                            email_prefix: '[ERRORS] ',
-                                            sender_address: %{ 'errors' <errors@priceremont.ru> },
-                                            exception_recipients: %w(e.lavretskiy@yandex.ru)
-                                          }
 end

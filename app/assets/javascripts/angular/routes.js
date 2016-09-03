@@ -14,7 +14,7 @@ app.config(function($stateProvider){
   }
 
   $stateProvider.state('articles_by_tags', {
-    url: '/articles/by_tags',
+    url: '/by_tags',
     params: { filter: null },
     templateUrl: '/?filter=',
     reloadOnSearch: true,

@@ -5,7 +5,7 @@ module Resource
     inherit_resources
 
     include Pundit
-    # rescue_from Exception, with: :rescue_render_json
+    rescue_from Exception, with: :rescue_render_json
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
     after_action :verify_authorized
