@@ -1,6 +1,6 @@
-- is_admin = current_user.try(:admin?)
-- admin_id = current_user.try(:id)
-- comment_ng_if = "#{is_admin} || comment.user.id==#{admin_id}"
+- is_admin = current_user.try(:admin?) || false
+- admin_id = current_user.try(:id) || 0
+- comment_ng_if = "#{is_admin} || comment.user.id === #{admin_id}"
 
 .article-comments
   .box.box-primary.direct-chat.direct-chat-primary.no-margin
