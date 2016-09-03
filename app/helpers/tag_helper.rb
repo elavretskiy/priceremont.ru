@@ -31,9 +31,9 @@ module TagHelper
 
   def tag_link_for_name(name, css, ng_class = nil)
     params = {
-      'ng-click': "ctrl.tag = '#{name}'; #{page_filter_ng_click("{ by_tag: '#{name}' }")}",
+      'ng-click': "ctrl.tag = \"#{name}\"; #{page_filter_ng_click("{ by_tag: \"#{name}\" }")}",
       class: "tag label #{css}",
-      'ng-class': ng_class || "{'label-primary':ctrl.tag === '#{name}'}"
+      'ng-class': ng_class || "{'label-primary':ctrl.tag === \"#{name}\"}"
     }
 
     content_tag :div, content_tag(:a, name, params)

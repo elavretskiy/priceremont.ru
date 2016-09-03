@@ -1,6 +1,13 @@
 - is_admin = current_user.try(:admin?) || false
 - admin_id = current_user.try(:id) || 0
 - ng_if = "#{is_admin} || #{ctrl_resource}.user.id === #{admin_id}"
+- index = params[:action] == 'index'
+
+- ng_bind_title = "#{ctrl_resource}.title"
+- ng_bind_title += ' | words:25' if index
+
+- ng_bind_text = "#{ctrl_resource}.text"
+- ng_bind_text += ' | words:100' if index
 
 li.time-label
   span.bg-green ng-bind="#{ctrl_resource}.created_at | date:'dd.MM.yyyy HH:mm'"
@@ -9,10 +16,10 @@ li
   .timeline-item
     span.time ng-bind="#{ctrl_resource}.user.email" ng-if="#{!is_admin}"
     a.time target='_self' ui-sref="admin_user_path(#{ctrl_resource}.user)" ng-if="#{is_admin}" ng-bind="#{ctrl_resource}.user.email"
-    h3.timeline-header ng-bind="#{ctrl_resource}.title" ng-if="!(#{ng_if})"
+    h3.timeline-header ng-bind=ng_bind_title ng-if="!(#{ng_if})"
     h3.timeline-header ng-if=ng_if
-      a.timeline-header target='_self' ui-sref="admin_article_path(#{ctrl_resource})" ng-bind="#{ctrl_resource}.title | words:25"
-    .timeline-body ng-bind="#{ctrl_resource}.text"
+      a.timeline-header target='_self' ui-sref="admin_article_path(#{ctrl_resource})" ng-bind=ng_bind_title
+    .timeline-body ng-bind=ng_bind_text
 
     - if params[:action] == 'index'
       .timeline-footer
