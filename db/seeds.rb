@@ -4,21 +4,25 @@ def self.create_emails(email, role = 1)
   User.find_by(email: email) || User.create!(params)
 end
 
-def self.create_article(user)
+tags = Faker::Hipster.words(25)
+
+def self.create_article(user, tags)
   params = { title: Faker::Hipster.paragraph, text: Faker::Hipster.paragraph(30) }
-  user.articles.find_or_create_by!(params)
+  article = user.articles.find_or_create_by!(params)
+  count = [5, 10, 15, 20, 25].sample
+  article.all_tags = tags.sample(count).join(', ')
 end
 
 emails = ['admin@priceremont.ru', 'user@priceremont.ru']
 emails.each_with_index { |email, index| create_emails(email, index) }
 
-1..30.times { create_emails(Faker::Internet.email) } if User.count < 30
+1..30.times { create_emails(Faker::Internet.email) } if User.count < 15
 
-User.all.each { |user| 1..30.times { create_article(user) } if user.articles.count < 30 }
+User.all.each { |user| 1..30.times { create_article(user, tags) } if user.articles.count < 10 }
 
 User.all.each do |user|
   Article.all.each do |article|
-    next if article.comments.count >= 30
+    next if article.comments.count >= 15
     article.comments.create(text: Faker::Hipster.paragraph, user: user)
   end
 end
