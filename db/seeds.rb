@@ -15,7 +15,7 @@ def self.create_article(user, tags)
 end
 
 emails = ['admin@priceremont.ru', 'user@priceremont.ru']
-emails.each_with_index { |email, index| create_emails(email, index) }
+emails.each_with_index { |email, index| create_user(email, index) }
 
 1..15.times { create_user(Faker::Internet.email) } if User.count < 15
 
