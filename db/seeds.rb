@@ -10,7 +10,6 @@ def self.create_article(user, tags)
   params = { title: Faker::Hipster.paragraph, text: Faker::Hipster.paragraph(30) }
   article = user.articles.find_or_create_by!(params)
   count = [1, 5, 10].sample
-  puts tags.sample(count).join(', ')
   article.all_tags = tags.sample(count).join(', ')
 end
 
