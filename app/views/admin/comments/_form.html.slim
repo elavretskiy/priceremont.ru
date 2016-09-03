@@ -1,0 +1,9 @@
+= simple_form_for [@namespace, resource] do |f|
+  = simple_group_field f, :text, { input_html: { rows: 5 } }
+  = simple_group_field f, :user_id,
+    { permit: current_user.admin?, as: :association,
+      collection: User.all, label_method: :email }
+  = simple_group_field f, :commentable,
+    { as: :association,
+      collection: policy_scope([@namespace, Article]), label_method: :title }
+  = f.submit 'Сохранить', class: 'btn btn-primary'

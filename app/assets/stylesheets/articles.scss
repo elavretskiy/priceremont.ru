@@ -1,0 +1,42 @@
+.timeline > li {
+  margin-right: 0px;
+}
+
+.timeline > li > .timeline-item {
+  margin-right: 0px;
+}
+
+.timeline {
+  margin: 0 0 20px 0;
+}
+
+.article-comments {
+  .box {
+    border-top: none;
+  }
+
+  .rails-errors {
+    display: none;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
+}
+
+a.direct-chat-name {
+  color: black;
+}
+
+a.direct-chat-name:hover, a.direct-chat-name:focus {
+  color: black;
+}
+
+a.timeline-header {
+  color: #555;
+  font-weight: 500 !important;
+}
+
+a.timeline-header:hover, a.timeline-header:focus {
+  color: #555;
+}

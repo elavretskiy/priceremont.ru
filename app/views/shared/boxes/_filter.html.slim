@@ -1,0 +1,4 @@
+.box
+  .box-body
+    = page_search
+    = render "#{@path}filter" if lookup_context.find_all("#{@path}_filter").any?

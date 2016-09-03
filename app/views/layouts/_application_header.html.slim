@@ -1,0 +1,17 @@
+header.main-header
+  nav.navbar.navbar-static-top role="navigation"
+    = link_to root_path, class: 'logo' do
+      span.logo-lg
+        b> priceremont.ru
+    .navbar-custom-menu
+      ul.nav.navbar-nav
+        - if current_user.present?
+          li
+            = link_to 'Мои статьи', admin_articles_path, target: '_self'
+          li
+            = link_to 'Мои комментарии', admin_comments_path, target: '_self'
+        li
+          - if current_user.blank?
+            = link_to 'Войти', new_user_session_path, target: '_self'
+          - else
+            = link_to 'Выйти', destroy_user_session_path, method: :delete, target: '_self'

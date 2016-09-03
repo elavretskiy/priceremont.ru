@@ -1,0 +1,19 @@
+tr
+  = page_display_th :id, { permit: current_user.admin? }
+  th
+  = page_display_th :text
+  = page_display_th :created_at, { permit: true }
+  = page_display_th :user_id, { permit: current_user.admin? }
+  = page_display_th :commentable, { permit: true }
+  th
+tr ng-repeat='comment in ctrl.comments.collection | filter:search'
+  = page_display_td :id, { permit: current_user.admin? }
+  = pundit_show_btn
+  = page_display_td :text, { truncate: 'characters:100' }
+  = page_display_td :created_at, { datetime: "date:'dd.MM.yyyy HH:mm'", permit: true }
+  = page_display_link :user_id,
+    { join: :user, field: :email, permit: current_user.admin? }
+  = page_display_link :commentable,
+    { model: :article, join: :commentable, field: :title,
+      permit: true, truncate: 'characters:50' }
+  = pundit_table_actions_btn

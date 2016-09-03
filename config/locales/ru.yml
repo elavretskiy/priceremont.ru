@@ -1,0 +1,83 @@
+ru:
+  boolean:
+    "true": Да
+    "false": Нет
+    "1": Да
+    "0": Нет
+  roles:
+    admin: Админ
+    user: Пользователь
+
+  flash:
+    actions:
+      create:
+        notice: Запись успешно сохранена
+      update:
+        notice: Запись успешно обновлена
+      destroy:
+        notice: Запись успешно удалена
+        alert: Запись не может быть удалена
+  activerecord:
+    successful:
+      messages:
+        created: Запись успешно сохранена
+        updated: Запись успешно обновлена
+        destroyed: Запись успешно удалена
+    models:
+      user:
+        one: Пользователь
+        few: Пользователя
+        many: Пользователи
+        other: Пользователей
+      profile:
+        one: Профиль
+        few: Профиля
+        many: Профили
+        other: Профилей
+      article:
+        one: Статья
+        few: Статьи
+        many: Статьи
+        other: Статей
+      comment:
+        one: Комментарий
+        few: Комментария
+        many: Комментарии
+        other: Комментариев
+      tag:
+        one: Тег
+        few: Тега
+        many: Теги
+        other: Тегов
+    attributes:
+      user:
+        email: E-mail
+        password: Новый пароль
+        password_confirmation: Подтверждение пароля
+        current_password: Текущий пароль
+        role: Роль
+        id: ID
+      profile:
+        email: E-mail
+        password: Новый пароль
+        password_confirmation: Подтверждение пароля
+        current_password: Текущий пароль
+        role: Роль
+        id: ID
+      article:
+        title: Заглавие
+        text: Текст
+        created_at: Создана
+        id: ID
+        user_id: Пользователь
+        is_published: Опубликована
+        all_tags: Теги
+      comment:
+        text: Текст
+        id: ID
+        user_id: Пользователь
+        commentable: Статья
+        created_at: Создан
+      tag:
+        name: Название
+        id: ID

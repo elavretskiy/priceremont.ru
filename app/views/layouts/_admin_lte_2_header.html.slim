@@ -1,0 +1,29 @@
+header.main-header
+  = link_to admin_root_path, class: 'logo' do
+    span.logo-mini
+      b> PR
+    span.logo-lg
+      b> priceremont.ru
+  nav.navbar.navbar-static-top role="navigation"
+    a.sidebar-toggle data-toggle="offcanvas" href="#" role="button" 
+      span.sr-only Toggle navigation
+    .navbar-custom-menu
+      ul.nav.navbar-nav
+        li
+          = link_to 'Блог', root_path, target: '_self'
+        li.dropdown.user.user-menu
+          a.dropdown-toggle data-toggle="dropdown" href="#" 
+            img.user-image src="/assets/user2-160x160.jpg"
+            span.hidden-xs
+              = current_user.email
+          ul.dropdown-menu
+            li.user-header
+              img.img-circle src="/assets/user2-160x160.jpg"
+              p
+                | priceremont.ru
+                small Администирование блога
+            li.user-footer
+              .pull-left
+                = link_to 'Профиль', admin_profile_path, 'ui-sref': 'admin_profile_path', class: 'btn btn-default btn-flat'
+              .pull-right
+                = link_to 'Выйти', destroy_user_session_path, class: 'btn btn-default btn-flat', method: :delete

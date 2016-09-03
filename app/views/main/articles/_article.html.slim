@@ -1,0 +1,21 @@
+- is_admin = current_user.try(:admin?)
+- admin_id = current_user.try(:id)
+- article_ng_if = "#{is_admin} || #{ctrl_resource}.user.id==#{admin_id}"
+
+li.time-label
+  span.bg-green ng-bind="#{ctrl_resource}.created_at | date:'dd.MM.yyyy HH:mm'"
+li
+  i.fa.fa-arrow-right.bg-yellow
+  .timeline-item
+    span.time ng-bind="#{ctrl_resource}.user.email" ng-if="#{!is_admin}"
+    a.time target='_self' ui-sref="admin_user_path(#{ctrl_resource}.user)" ng-if="#{is_admin}" ng-bind="#{ctrl_resource}.user.email"
+    h3.timeline-header ng-bind="#{ctrl_resource}.title" ng-if="!(#{article_ng_if})"
+    h3.timeline-header ng-if=article_ng_if
+      a.timeline-header target='_self' ui-sref="admin_article_path(#{ctrl_resource})" ng-bind="#{ctrl_resource}.title | words:25"
+    .timeline-body ng-bind="#{ctrl_resource}.text"
+
+    - if params[:action] == 'index'
+      .timeline-footer
+        a.btn.btn-primary.btn-xs ui-sref="article_path(#{ctrl_resource})" Читать
+
+    = tag_cloud_for_json

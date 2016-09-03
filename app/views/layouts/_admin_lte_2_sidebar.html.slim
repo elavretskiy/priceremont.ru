@@ -1,0 +1,17 @@
+aside.main-sidebar
+  section.sidebar
+    .user-panel
+      .pull-left.image
+        img.img-circle src="/assets/user2-160x160.jpg"
+      .pull-left.info
+        p
+          = current_user.email
+        a href="#"
+          i.fa.fa-circle.text-success
+          | Онлайн
+    ul.sidebar-menu
+      li.header Меню
+      = pundit_sidebar_menu(User, 'admin_users_path', 'fa-users', 'Пользователи')
+      = pundit_sidebar_menu(Article, 'admin_articles_path', 'fa-list', 'Статьи')
+      = pundit_sidebar_menu(Comment, 'admin_comments_path', 'fa-comments', 'Комментарии')
+      = pundit_sidebar_menu(Tag, 'admin_tags_path', 'fa-tags', 'Теги')

@@ -1,0 +1,13 @@
+= pundit_new_btn
+= render 'shared/boxes/filter'
+
+.box
+  .box-header.with-border.clearfix ng-if=page_pagination_show?
+    = page_pagination
+  .box-body
+    .table-responsive
+      table.table.table-bordered.table-hover
+        tbody
+          = index
+  .box-footer.clearfix ng-if=page_pagination_show?
+    = page_pagination

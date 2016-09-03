@@ -1,0 +1,8 @@
+.box-header.with-border ng-controller='MainCommentsCtrl' ng-if="#{current_user.present?}"
+  form method='post' ng-submit="save({form_name: 'comment'}); $event.preventDefault();"
+    input type='hidden' name='comment[:commentable_id]' ng-init="comment.commentable_id=#{resource.id}"
+    input type='hidden' name='comment[:commentable_type]' ng-init="comment.commentable_type='Article'"
+    .input-group.form-group
+      input.form-control name='comment[text]' ng-model='comment.text' placeholder='Введите комментарий' type='text'
+      span.input-group-btn
+        button.btn.btn-primary.btn-flat type='submit'  Отправить

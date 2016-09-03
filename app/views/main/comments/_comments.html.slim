@@ -1,0 +1,17 @@
+- is_admin = current_user.try(:admin?)
+- admin_id = current_user.try(:id)
+- comment_ng_if = "#{is_admin} || comment.user.id==#{admin_id}"
+
+.article-comments
+  .box.box-primary.direct-chat.direct-chat-primary.no-margin
+    = render 'main/comments/form'
+    .box-body
+      .direct-chat-messages
+        .direct-chat-msg.right ng-repeat='comment in ctrl.article.comments | filter:search'
+          .direct-chat-info.clearfix
+            span.direct-chat-name.pull-right ng-bind='comment.user.email' ng-if="#{!is_admin}"
+            a.direct-chat-name.pull-right target='_self' ui-sref='admin_user_path(comment.user)' ng-if="#{is_admin}" ng-bind='comment.user.email'
+            span.direct-chat-timestamp.pull-left ng-bind="comment.created_at | date:'dd.MM.yyyy HH:mm'"
+          img.direct-chat-img src='/assets/user2-160x160.jpg'
+          .direct-chat-text ng-bind='comment.text' ng-if="!(#{comment_ng_if})"
+          a.direct-chat-text target='_self' ui-sref='admin_comment_path(comment)' ng-if=comment_ng_if ng-bind='comment.text'

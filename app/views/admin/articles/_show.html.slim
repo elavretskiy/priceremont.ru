@@ -1,0 +1,7 @@
+= page_display_field :id, { permit: current_user.admin? }
+= page_display_field :title
+= page_display_field :text
+= page_display_field :created_at, { datetime: "date:'dd.MM.yyyy HH:mm'" }
+= page_display_field :is_published, { translate: true }
+= page_display_field :all_tags
+= page_display_field :user_id, { as: :link, join: :user, field: :email }

@@ -1,0 +1,13 @@
+- if !resource.profile? && resource.email.present?
+  - model = User
+  dl.dl-horizontal.no-margin
+    = page_display_field :email, { permit: true }
+  hr
+
+= simple_form_for [@namespace, resource] do |f|
+  = simple_group_field f, :role, { as: :select, collection: current_user.collection_roles }
+  = simple_group_field f, :email, { permit: resource.email.blank? }
+  = simple_group_field f, :current_password, { permit: resource.profile? }
+  = simple_group_field f, :password
+  = simple_group_field f, :password_confirmation
+  = f.submit 'Сохранить', class: 'btn btn-primary'

@@ -1,0 +1,10 @@
+tr
+  = page_display_th :id, { permit: current_user.admin? }
+  th
+  = page_display_th :name
+  th
+tr ng-repeat='tag in ctrl.tags.collection | filter:search'
+  = page_display_td :id, { permit: current_user.admin? }
+  = pundit_show_btn
+  = page_display_td :name
+  = pundit_table_actions_btn

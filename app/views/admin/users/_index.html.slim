@@ -1,0 +1,12 @@
+tr
+  = page_display_th :id
+  th
+  = page_display_th :email, { permit: true }
+  = page_display_th :role
+  th
+tr ng-repeat='user in ctrl.users.collection | filter:search'
+  = page_display_td :id
+  = pundit_show_btn
+  = page_display_td :email, { permit: true }
+  = page_display_td :role, { translate: true }
+  = pundit_table_actions_btn

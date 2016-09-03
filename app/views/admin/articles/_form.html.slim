@@ -1,0 +1,11 @@
+= simple_form_for [@namespace, resource] do |f|
+  = simple_group_field f, :title
+  = simple_group_field f, :text, { input_html: { rows: 10 } }
+  = simple_group_field f, :created_at, { as: :date, label: 'Дата создания' }
+  = simple_group_field f, :created_at, { as: :time, label: 'Время создания' }
+  = simple_group_field f, :is_published
+  = simple_group_field f, :all_tags
+  = simple_group_field f, :user_id,
+    { permit: current_user.admin?, as: :association,
+      collection: User.all, label_method: :email }
+  = f.submit 'Сохранить', class: 'btn btn-primary'

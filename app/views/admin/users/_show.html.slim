@@ -1,0 +1,3 @@
+= page_display_field :id
+= page_display_field :email, { permit: true }
+= page_display_field :role, { translate: true, permit: current_user.admin? }

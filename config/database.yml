@@ -1,0 +1,29 @@
+test:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: priceremont_test
+  pool:     5
+  username: lavrik
+  password:
+  template: template0
+
+development:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: priceremont_development
+  pool:     5
+  username: lavrik
+  password:
+  template: template0
+
+production:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: priceremont_production
+  pool:     5
+  username: lavrik
+  password:
+  template: template0

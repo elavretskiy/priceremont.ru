@@ -1,0 +1,4 @@
+.row
+  .col-md-12
+    ul.timeline.timeline-inverse ng-repeat='article in ctrl.articles.collection | filter:search'
+      = render 'main/articles/article'

@@ -1,0 +1,20 @@
+tr
+  = page_display_th :id, { permit: current_user.admin? }
+  th
+  = page_display_th :title
+  = page_display_th :text
+  = page_display_th :created_at
+  = page_display_th :is_published
+  = page_display_th :all_tags
+  = page_display_th :user_id
+  th
+tr ng-repeat='article in ctrl.articles.collection | filter:search'
+  = page_display_td :id, { permit: current_user.admin? }
+  = pundit_show_btn
+  = page_display_td :title, { truncate: 'characters:50' }
+  = page_display_td :text, { truncate: 'characters:100' }
+  = page_display_td :created_at, { datetime: "date:'dd.MM.yyyy HH:mm'" }
+  = page_display_td :is_published, { translate: true }
+  = page_display_td :all_tags
+  = page_display_link :user_id, { join: :user, field: :email }
+  = pundit_table_actions_btn

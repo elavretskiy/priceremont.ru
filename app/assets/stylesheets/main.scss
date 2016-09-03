@@ -1,0 +1,43 @@
+.w1 {
+  width: 1px;
+  white-space: nowrap
+}
+
+.ngn {
+  padding: 14px 40px;
+}
+
+.box-body > .box-tools, .box-header > .box-tools {
+  position: relative;
+  right: 0;
+  top: 0;
+}
+
+.help-block {
+  font-size: 12px;
+  margin-top: 0px !important;
+}
+
+.page-filter {
+  margin-bottom: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.sync-account-link {
+  width: 50px !important;
+}
+
+.login-logo {
+  .title {
+    font-size: 25px;
+  }
+}
+
+.nav-tabs-custom > .tab-content.without-padding {
+  padding: 0;
+}
+
+.box .table {
+  margin-bottom: 0;
+}
