@@ -1,6 +1,7 @@
 module PunditHelper
   def pundit_new_btn
     return page_header_btn if params[:action] == 'new'
+    return if !policy([@namespace, @model]).new?
 
     params = {
       class: 'btn btn-success btn-sm',

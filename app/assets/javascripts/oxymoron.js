@@ -215,6 +215,27 @@ angular.module("oxymoron.config.states", [])
           }
         })
       
+        .state('comment_path', {
+          url: '/comments/:id',
+          templateUrl: function(params) {
+            params['ng-view']='';
+            
+            if ($stateProvider.oxymoron_location) {
+              var query = _.omit($stateProvider.oxymoron_location.search(), _.keys(params));
+              params = angular.extend(query, params); 
+            }
+
+            return Routes['comment_path'](params);
+          },
+          reloadOnSearch: true,
+          controller: 'MainCommentsCtrl as ctrl',
+          resolve: {
+            action: ['$stateParams', function ($stateParams) {
+              return resolve('show', $stateParams)
+            }]
+          }
+        })
+      
         .state('articles_path', {
           url: '/articles',
           templateUrl: function(params) {
@@ -236,48 +257,6 @@ angular.module("oxymoron.config.states", [])
           }
         })
       
-        .state('new_article_path', {
-          url: '/articles/new',
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            if ($stateProvider.oxymoron_location) {
-              var query = _.omit($stateProvider.oxymoron_location.search(), _.keys(params));
-              params = angular.extend(query, params); 
-            }
-
-            return Routes['new_article_path'](params);
-          },
-          reloadOnSearch: true,
-          controller: 'MainArticlesCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('new', $stateParams)
-            }]
-          }
-        })
-      
-        .state('edit_article_path', {
-          url: '/articles/:id/edit',
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            if ($stateProvider.oxymoron_location) {
-              var query = _.omit($stateProvider.oxymoron_location.search(), _.keys(params));
-              params = angular.extend(query, params); 
-            }
-
-            return Routes['edit_article_path'](params);
-          },
-          reloadOnSearch: true,
-          controller: 'MainArticlesCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('edit', $stateParams)
-            }]
-          }
-        })
-      
         .state('article_path', {
           url: '/articles/:id',
           templateUrl: function(params) {
@@ -292,90 +271,6 @@ angular.module("oxymoron.config.states", [])
           },
           reloadOnSearch: true,
           controller: 'MainArticlesCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('show', $stateParams)
-            }]
-          }
-        })
-      
-        .state('comments_path', {
-          url: '/comments',
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            if ($stateProvider.oxymoron_location) {
-              var query = _.omit($stateProvider.oxymoron_location.search(), _.keys(params));
-              params = angular.extend(query, params); 
-            }
-
-            return Routes['comments_path'](params);
-          },
-          reloadOnSearch: true,
-          controller: 'MainCommentsCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('index', $stateParams)
-            }]
-          }
-        })
-      
-        .state('new_comment_path', {
-          url: '/comments/new',
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            if ($stateProvider.oxymoron_location) {
-              var query = _.omit($stateProvider.oxymoron_location.search(), _.keys(params));
-              params = angular.extend(query, params); 
-            }
-
-            return Routes['new_comment_path'](params);
-          },
-          reloadOnSearch: true,
-          controller: 'MainCommentsCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('new', $stateParams)
-            }]
-          }
-        })
-      
-        .state('edit_comment_path', {
-          url: '/comments/:id/edit',
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            if ($stateProvider.oxymoron_location) {
-              var query = _.omit($stateProvider.oxymoron_location.search(), _.keys(params));
-              params = angular.extend(query, params); 
-            }
-
-            return Routes['edit_comment_path'](params);
-          },
-          reloadOnSearch: true,
-          controller: 'MainCommentsCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('edit', $stateParams)
-            }]
-          }
-        })
-      
-        .state('comment_path', {
-          url: '/comments/:id',
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            if ($stateProvider.oxymoron_location) {
-              var query = _.omit($stateProvider.oxymoron_location.search(), _.keys(params));
-              params = angular.extend(query, params); 
-            }
-
-            return Routes['comment_path'](params);
-          },
-          reloadOnSearch: true,
-          controller: 'MainCommentsCtrl as ctrl',
           resolve: {
             action: ['$stateParams', function ($stateParams) {
               return resolve('show', $stateParams)
@@ -593,27 +488,6 @@ angular.module("oxymoron.config.states", [])
           }
         })
       
-        .state('new_admin_comment_path', {
-          url: '/admin/comments/new',
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            if ($stateProvider.oxymoron_location) {
-              var query = _.omit($stateProvider.oxymoron_location.search(), _.keys(params));
-              params = angular.extend(query, params); 
-            }
-
-            return Routes['new_admin_comment_path'](params);
-          },
-          reloadOnSearch: true,
-          controller: 'AdminCommentsCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('new', $stateParams)
-            }]
-          }
-        })
-      
         .state('edit_admin_comment_path', {
           url: '/admin/comments/:id/edit',
           templateUrl: function(params) {
@@ -673,27 +547,6 @@ angular.module("oxymoron.config.states", [])
           resolve: {
             action: ['$stateParams', function ($stateParams) {
               return resolve('index', $stateParams)
-            }]
-          }
-        })
-      
-        .state('new_admin_tag_path', {
-          url: '/admin/tags/new',
-          templateUrl: function(params) {
-            params['ng-view']='';
-            
-            if ($stateProvider.oxymoron_location) {
-              var query = _.omit($stateProvider.oxymoron_location.search(), _.keys(params));
-              params = angular.extend(query, params); 
-            }
-
-            return Routes['new_admin_tag_path'](params);
-          },
-          reloadOnSearch: true,
-          controller: 'AdminTagsCtrl as ctrl',
-          resolve: {
-            action: ['$stateParams', function ($stateParams) {
-              return resolve('new', $stateParams)
             }]
           }
         })
@@ -925,12 +778,12 @@ angular.module("oxymoron.services.resources", [])
   }])
 
   
-    .factory('Article', ['$resource', 'resourceDecorator', function ($resource, resourceDecorator) {
-      return resourceDecorator($resource('/articles/:id.json', {"id":"@id"}, {"new":{"method":"GET","url":"/articles/:id/new.json"},"edit":{"method":"GET","url":"/articles/:id/edit.json"},"update":{"method":"PUT"},"create":{"method":"POST"},"destroy":{"method":"DELETE"}}));
-    }])
-  
     .factory('Comment', ['$resource', 'resourceDecorator', function ($resource, resourceDecorator) {
       return resourceDecorator($resource('/comments/:id.json', {"id":"@id"}, {"new":{"method":"GET","url":"/comments/:id/new.json"},"edit":{"method":"GET","url":"/comments/:id/edit.json"},"update":{"method":"PUT"},"create":{"method":"POST"},"destroy":{"method":"DELETE"}}));
+    }])
+  
+    .factory('Article', ['$resource', 'resourceDecorator', function ($resource, resourceDecorator) {
+      return resourceDecorator($resource('/articles/:id.json', {"id":"@id"}, {"new":{"method":"GET","url":"/articles/:id/new.json"},"edit":{"method":"GET","url":"/articles/:id/edit.json"},"update":{"method":"PUT"},"create":{"method":"POST"},"destroy":{"method":"DELETE"}}));
     }])
   
     .factory('AdminUser', ['$resource', 'resourceDecorator', function ($resource, resourceDecorator) {
@@ -1328,7 +1181,7 @@ angular.module("oxymoron.directives", ['oxymoron.directives.fileupload', 'oxymor
 (function () {
   var Routes = function () {
     var self = this,
-        routes = {"new_user_session":{"defaults":{},"path":"/auth/sign_in"},"user_session":{"defaults":{},"path":"/auth/sign_in"},"destroy_user_session":{"defaults":{},"path":"/auth/sign_out"},"user_password":{"defaults":{},"path":"/auth/password"},"new_user_password":{"defaults":{},"path":"/auth/password/new"},"edit_user_password":{"defaults":{},"path":"/auth/password/edit"},"cancel_user_registration":{"defaults":{},"path":"/auth/cancel"},"user_registration":{"defaults":{},"path":"/auth"},"new_user_registration":{"defaults":{},"path":"/auth/sign_up"},"edit_user_registration":{"defaults":{},"path":"/auth/edit"},"user_confirmation":{"defaults":{},"path":"/auth/confirmation"},"new_user_confirmation":{"defaults":{},"path":"/auth/confirmation/new"},"root":{"defaults":{},"path":"/"},"articles":{"defaults":{},"path":"/articles"},"new_article":{"defaults":{},"path":"/articles/new"},"edit_article":{"defaults":{},"path":"/articles/:id/edit"},"article":{"defaults":{},"path":"/articles/:id"},"comments":{"defaults":{},"path":"/comments"},"new_comment":{"defaults":{},"path":"/comments/new"},"edit_comment":{"defaults":{},"path":"/comments/:id/edit"},"comment":{"defaults":{},"path":"/comments/:id"},"admin_root":{"defaults":{},"path":"/admin"},"admin_users":{"defaults":{},"path":"/admin/users"},"new_admin_user":{"defaults":{},"path":"/admin/users/new"},"edit_admin_user":{"defaults":{},"path":"/admin/users/:id/edit"},"admin_user":{"defaults":{},"path":"/admin/users/:id"},"admin_articles":{"defaults":{},"path":"/admin/articles"},"new_admin_article":{"defaults":{},"path":"/admin/articles/new"},"edit_admin_article":{"defaults":{},"path":"/admin/articles/:id/edit"},"admin_article":{"defaults":{},"path":"/admin/articles/:id"},"admin_comments":{"defaults":{},"path":"/admin/comments"},"new_admin_comment":{"defaults":{},"path":"/admin/comments/new"},"edit_admin_comment":{"defaults":{},"path":"/admin/comments/:id/edit"},"admin_comment":{"defaults":{},"path":"/admin/comments/:id"},"admin_tags":{"defaults":{},"path":"/admin/tags"},"new_admin_tag":{"defaults":{},"path":"/admin/tags/new"},"edit_admin_tag":{"defaults":{},"path":"/admin/tags/:id/edit"},"admin_tag":{"defaults":{},"path":"/admin/tags/:id"},"admin_profile":{"defaults":{},"path":"/admin/profile"},"edit_admin_profile":{"defaults":{},"path":"/admin/profile/edit"},"rails_info_properties":{"defaults":{},"path":"/rails/info/properties"},"rails_info_routes":{"defaults":{},"path":"/rails/info/routes"},"rails_info":{"defaults":{},"path":"/rails/info"},"rails_mailers":{"defaults":{},"path":"/rails/mailers"}};
+        routes = {"new_user_session":{"defaults":{},"path":"/auth/sign_in"},"user_session":{"defaults":{},"path":"/auth/sign_in"},"destroy_user_session":{"defaults":{},"path":"/auth/sign_out"},"user_password":{"defaults":{},"path":"/auth/password"},"new_user_password":{"defaults":{},"path":"/auth/password/new"},"edit_user_password":{"defaults":{},"path":"/auth/password/edit"},"cancel_user_registration":{"defaults":{},"path":"/auth/cancel"},"user_registration":{"defaults":{},"path":"/auth"},"new_user_registration":{"defaults":{},"path":"/auth/sign_up"},"edit_user_registration":{"defaults":{},"path":"/auth/edit"},"user_confirmation":{"defaults":{},"path":"/auth/confirmation"},"new_user_confirmation":{"defaults":{},"path":"/auth/confirmation/new"},"root":{"defaults":{},"path":"/"},"comments":{"defaults":{},"path":"/comments"},"comment":{"defaults":{},"path":"/comments/:id"},"articles":{"defaults":{},"path":"/articles"},"article":{"defaults":{},"path":"/articles/:id"},"admin_root":{"defaults":{},"path":"/admin"},"admin_users":{"defaults":{},"path":"/admin/users"},"new_admin_user":{"defaults":{},"path":"/admin/users/new"},"edit_admin_user":{"defaults":{},"path":"/admin/users/:id/edit"},"admin_user":{"defaults":{},"path":"/admin/users/:id"},"admin_articles":{"defaults":{},"path":"/admin/articles"},"new_admin_article":{"defaults":{},"path":"/admin/articles/new"},"edit_admin_article":{"defaults":{},"path":"/admin/articles/:id/edit"},"admin_article":{"defaults":{},"path":"/admin/articles/:id"},"admin_comments":{"defaults":{},"path":"/admin/comments"},"edit_admin_comment":{"defaults":{},"path":"/admin/comments/:id/edit"},"admin_comment":{"defaults":{},"path":"/admin/comments/:id"},"admin_tags":{"defaults":{},"path":"/admin/tags"},"edit_admin_tag":{"defaults":{},"path":"/admin/tags/:id/edit"},"admin_tag":{"defaults":{},"path":"/admin/tags/:id"},"admin_profile":{"defaults":{},"path":"/admin/profile"},"edit_admin_profile":{"defaults":{},"path":"/admin/profile/edit"},"rails_info_properties":{"defaults":{},"path":"/rails/info/properties"},"rails_info_routes":{"defaults":{},"path":"/rails/info/routes"},"rails_info":{"defaults":{},"path":"/rails/info"},"rails_mailers":{"defaults":{},"path":"/rails/mailers"}};
 
     self.defaultParams = {}
 

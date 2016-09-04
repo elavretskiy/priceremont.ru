@@ -2,7 +2,8 @@ app.controller 'MainArticlesCtrl', [
   'Article'
   'action'
   '$state'
-  (Model, action, $state) ->
+  '$location'
+  (Model, action, $state, $location) ->
     ctrl = this
 
     $('.loading').show()
@@ -12,10 +13,10 @@ app.controller 'MainArticlesCtrl', [
         $('.loading').show()
         Model.get { page: page, search: search, filter: filter }, (res) ->
           ctrl.articles = res
-      ctrl.query 1, null, params.filter
+      ctrl.query 1, null, params.filter || { by_tag: $location.search().by_tag }
 
     action 'show', (params) ->
       ctrl.article = Model.get(id: params.id)
-#      ctrl.query = (page, search, filter) ->
-#        $state.go('filter_articles_path', { filter: filter })
+      ctrl.query = (page, search, filter) ->
+        $location.url("/?by_tag=#{filter.by_tag}");
 ]

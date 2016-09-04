@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
   scope module: :main do
     root to: 'articles#index'
-    resources :articles
-    resources :comments
+    resources :comments, only: [:create, :show]
+    resources :articles, only: [:index, :show]
   end
 
   namespace :admin do
@@ -18,8 +18,8 @@ Rails.application.routes.draw do
 
     resources :users
     resources :articles
-    resources :comments
-    resources :tags
+    resources :comments, except: [:new, :create]
+    resources :tags, except: [:new, :create]
 
     get 'profile', action: :show, controller: 'profiles'
     patch 'profile', action: :update, controller: 'profiles'
