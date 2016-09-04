@@ -5,8 +5,9 @@ module Resource
     inherit_resources
 
     include Pundit
-    rescue_from Exception, with: :rescue_render_json
-    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+    rescue_from Exception, with: :render_server_error
+    rescue_from Pundit::NotAuthorizedError, with: :render_not_authorized_error
 
     after_action :verify_authorized
 
@@ -179,16 +180,18 @@ module Resource
       @namespace = self.class.parent.to_s.downcase.to_sym
     end
 
-    def rescue_render_json(e, msg = nil)
+    def render_server_error(e, msg = nil)
       msg = msg || 'Ошибка сервера. Повторите попытку'
       ExceptionNotifier.notify_exception(e, env: request.env, data: { message: msg })
-      return render json: { msg: msg }, status: 422 if request.xhr?
-      redirect_to request.referrer || root_path, alert: msg
+      render_error(msg, 422)
     end
 
-    def user_not_authorized
-      msg = 'У Вас недостаточно прав для выполнения данных действий'
-      return render json: { msg: msg }, status: 403 if request.xhr?
+    def render_not_authorized_error
+      render_error('У Вас недостаточно прав для выполнения данных действий', 403)
+    end
+
+    def render_error(msg, status)
+      return render json: { msg: msg }, status: status if request.xhr?
       redirect_to request.referrer || root_path, alert: msg
     end
 

@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def admin?
     self.class.parent == Admin
   end

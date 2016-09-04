@@ -1,14 +1,10 @@
 app.config(function($stateProvider){
   var resolve = function (action, $stateParams) {
     return function (actionNames, callback) {
-      try {
-        var actionNames = angular.isArray(actionNames) ? actionNames : [actionNames];
+      var actionNames = angular.isArray(actionNames) ? actionNames : [actionNames];
 
-        if (actionNames.indexOf(action)!=-1) {
-          callback($stateParams);
-        }
-      } catch (e) {
-        console.error(e);
+      if (actionNames.indexOf(action)!=-1) {
+        callback($stateParams);
       }
     }
   }
