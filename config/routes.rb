@@ -9,8 +9,9 @@ Rails.application.routes.draw do
 
   scope module: :main do
     root to: 'articles#index'
+
     resources :comments, only: [:create, :show]
-    resources :articles, only: [:index, :show]
+    resources :articles, only: [:index]
   end
 
   namespace :admin do
@@ -27,4 +28,5 @@ Rails.application.routes.draw do
   end
 
   get 'admin/profile/edit', action: :edit, controller: 'admin/profiles', as: :edit_admin_profile
+  get 'articles/:id', action: :show, controller: 'main/articles', as: :article, cache: false
 end
