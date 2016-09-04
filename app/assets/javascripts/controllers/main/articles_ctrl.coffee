@@ -3,7 +3,8 @@ app.controller 'MainArticlesCtrl', [
   'action'
   '$state'
   '$location'
-  (Model, action, $state, $location) ->
+  '$window'
+  (Model, action, $state, $location, $window) ->
     ctrl = this
 
     $('.loading').show()
@@ -13,6 +14,7 @@ app.controller 'MainArticlesCtrl', [
         $('.loading').show()
         Model.get { page: page, search: search, filter: filter }, (res) ->
           ctrl.articles = res
+          $window.scrollTo(0, 0)
       ctrl.query 1, null, params.filter || { by_tag: $location.search().by_tag }
 
     action 'show', (params) ->
