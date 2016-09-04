@@ -39,7 +39,7 @@ class Article < ActiveRecord::Base
     where = 'CAST(articles.id AS TEXT) LIKE (:q) OR ' +
             'lower(title) LIKE lower(:q) OR lower(text) LIKE lower(:q) OR ' +
             'lower(users.email) LIKE lower(:q) OR lower(tags.name) LIKE lower(:q)'
-    joins(:user, :tags).where(where, q: "%#{q}%")
+    joins(:user, :tags).where(where, q: "%#{q}%").distinct
   }
 
   def all_tags=(names)
