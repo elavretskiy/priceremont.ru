@@ -31,9 +31,9 @@ module TagHelper
 
   def tag_link_for_name(name, css, ng_class = nil)
     params = {
-      'ng-click': "ctrl.tag = \"#{name}\"; #{page_filter_ng_click("{ by_tag: \"#{name}\" }")}",
+      'ng-click': "ctrl.articles.filter.by_tag = \"#{name}\"; #{page_filter_ng_click("{ by_tag: \"#{name}\" }")}",
       class: "tag label #{css}",
-      'ng-class': ng_class || "{'label-primary':ctrl.tag === \"#{name}\"}"
+      'ng-class': ng_class || "{'label-primary':ctrl.articles.filter.by_tag === \"#{name}\"}"
     }
 
     content_tag :div, content_tag(:a, name, params)
@@ -41,9 +41,9 @@ module TagHelper
 
   def tag_link_for_json
     params = {
-      'ng-click': "ctrl.tag = tag.name; #{page_filter_ng_click("{ by_tag: tag.name }")}",
+      'ng-click': "ctrl.articles.filter.by_tag = tag.name; #{page_filter_ng_click("{ by_tag: tag.name }")}",
       class: 'tag label',
-      'ng-class': "[tag.css, {'label-primary':ctrl.tag === tag.name}]",
+      'ng-class': "[tag.css, {'label-primary':ctrl.articles.filter.by_tag === tag.name}]",
       'ng-bind': 'tag.name'
     }
     ng_repeat = "tag in #{ctrl_resource}.tag_classes"

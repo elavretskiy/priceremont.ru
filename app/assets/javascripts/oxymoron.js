@@ -196,7 +196,6 @@ angular.module("oxymoron.config.states", [])
       
         .state('root_path', {
           url: '/',
-          params: { filter: null },
           templateUrl: function(params) {
             params['ng-view']='';
             
