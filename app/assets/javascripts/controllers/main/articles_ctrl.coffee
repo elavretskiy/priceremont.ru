@@ -17,6 +17,6 @@ app.controller 'MainArticlesCtrl', [
 
     action 'show', (params) ->
       ctrl.article = Model.get(id: params.id)
-      ctrl.query = (page, search, filter) ->
-        $state.go('articles_by_tags', { filter: filter })
+#      ctrl.query = (page, search, filter) ->
+#        $state.go('articles_by_tags', { filter: filter })
 ]
