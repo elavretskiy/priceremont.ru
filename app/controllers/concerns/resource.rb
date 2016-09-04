@@ -6,7 +6,7 @@ module Resource
 
     include Pundit
 
-    # rescue_from Exception, with: :render_server_error
+    rescue_from Exception, with: :render_server_error
     rescue_from Pundit::NotAuthorizedError, with: :render_not_authorized_error
 
     after_action :verify_authorized
