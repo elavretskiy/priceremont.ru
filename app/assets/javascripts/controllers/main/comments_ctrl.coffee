@@ -15,6 +15,5 @@ app.controller 'MainCommentsCtrl', [
           commentable_type: $scope.comment.commentable_type
         }
       }, (res) ->
-        ctrl.article = null
-#        $state.reload()
+        $state.reload()
 ]
