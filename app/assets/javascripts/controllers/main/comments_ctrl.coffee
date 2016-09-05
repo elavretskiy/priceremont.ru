@@ -3,6 +3,8 @@ app.controller 'MainCommentsCtrl', [
   '$scope'
   '$state'
   (Model, $scope, $state) ->
+    ctrl = this
+
     $scope.save = (params) ->
       $('.loading').show()
       Model.create {
@@ -13,5 +15,6 @@ app.controller 'MainCommentsCtrl', [
           commentable_type: $scope.comment.commentable_type
         }
       }, (res) ->
-        $state.reload()
+        ctrl.article = null
+#        $state.reload()
 ]
