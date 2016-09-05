@@ -44,11 +44,10 @@ class Main::ArticlesController < Main::BaseController
   end
 
   def show_render_json
-    set_article
     @resource.as_json_include_main_resource
   end
 
-  def set_article
+  def set_resource
     @resource = if request.xhr?
                   policy_scope([@namespace, @model])
                     .includes(comments: :user)
