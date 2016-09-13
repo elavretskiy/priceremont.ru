@@ -25,7 +25,9 @@ class Comment < ActiveRecord::Base
 
   validates :text, :user_id, presence: true
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> {
+    where.not(user_id: nil, commentable_id: nil).order(created_at: :desc)
+  }
 
   scope :search, -> q {
     where = 'CAST(comments.id AS TEXT) LIKE (:q) OR ' +

@@ -24,6 +24,8 @@ class Article < ActiveRecord::Base
   validates :title, :text, presence: true, uniqueness: true
   validates :user_id, presence: true
 
+  default_scope -> { where.not(user_id: nil) }
+
   scope :is_published, -> { where(is_published: true) }
   scope :by_ids, -> ids { where(id: ids) }
 
