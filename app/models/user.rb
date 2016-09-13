@@ -31,8 +31,9 @@ class User < ActiveRecord::Base
   include IndexPage
   attr_accessor :current_password
 
-  has_many :articles, dependent: :nullify
+  has_many :articles
   has_many :comments, dependent: :nullify
+  has_many :articles_comments, through: :articles, source: :comments
 
   enum role: { admin: 0, user: 1 }
 
@@ -45,6 +46,8 @@ class User < ActiveRecord::Base
   validates :password, :password_confirmation, presence: true,
             length: { within: 6..40 }, on: :update,
             if: lambda { password.present? || password_confirmation.present? }
+
+  before_destroy :set_articles_as_nullify
 
   scope :by_ids, -> ids { where(id: ids) }
   scope :without_ids, ->(ids) { where.not(id: ids) }
@@ -65,5 +68,12 @@ class User < ActiveRecord::Base
 
   def profile?
     self.class.name == 'Profile'
+  end
+
+  private
+
+  def set_articles_as_nullify
+    articles_comments.update_all(commentable_id: nil)
+    articles.update_all(user_id: nil)
   end
 end
