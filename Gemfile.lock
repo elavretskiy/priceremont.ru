@@ -179,8 +179,8 @@ GEM
       pry (>= 0.9.11)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
-    rack (1.6.4)
-    rack-protection (1.5.3)
+    rack (1.6.9)
+    rack-protection (1.5.5)
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -377,4 +377,4 @@ RUBY VERSION
    ruby 2.2.3p173
 
 BUNDLED WITH
-   1.12.5
+   1.13.1
